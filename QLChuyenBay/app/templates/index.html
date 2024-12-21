@@ -1,0 +1,71 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+<main>
+    <div class="search-form">
+        <form action="" method="post">
+            <div class="form-group">
+                <label for="from">Điểm đi:</label>
+                <select name="from" id="from">
+                    <option value="">Chọn điểm đi</option>
+                    <option value="Hanoi">Hanoi</option>
+                    -->
+                    <option value="Ho Chi Minh City">Ho Chi Minh City</option>
+                    <option value="Da Nang">Da Nang</option>
+                    <option value="Nha Trang">Nha Trang</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="to">Điểm đến:</label>
+                <select name="to" id="to">
+                    <option value="">Chọn điểm đến</option>
+                    <option value="Bangkok">Bangkok</option>
+                    -->
+                    <option value="Singapore">Singapore</option>
+                    <option value="Kuala Lumpur">Kuala Lumpur</option>
+                    <option value="Tokyo">Tokyo</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="departure-date">Ngày khởi hành:</label>
+                <input type="date" name="departure-date" id="departure-date">
+            </div>
+            <div class="form-group">
+                <input type="radio" name="trip-type" id="one-way" value="one-way" checked>
+                <label for="one-way">Một chiều</label>
+                <input type="radio" name="trip-type" id="round-trip" value="round-trip">
+                <label for="round-trip">Khứ hồi</label>
+            </div>
+            <button type="submit">Tìm chuyến bay</button>
+        </form>
+    </div>
+
+    <section class="partner-airlines">
+        <h2>Hãng hàng không đối tác</h2>
+        <div class="airline-logos">
+            <img src="data:image/png;base64,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" alt="Vietjet Air">
+        </div>
+    </section>
+</main>
+<!--<script>-->
+<!--    const form = document.querySelector('form');-->
+<!--    const searchBtn = document.querySelector('.search-btn');-->
+<!--    form.addEventListener('mouseover', () => {-->
+<!--        searchBtn.style.display = 'block';-->
+<!--    });-->
+<!--    form.addEventListener('mouseleave', () => {-->
+<!--        searchBtn.style.display = 'none';-->
+<!--    });-->
+
+<!--    const partnerLogos = document.querySelectorAll('.partner-logo');-->
+<!--    partnerLogos.forEach(logo => {-->
+<!--        const button = logo.querySelector('.partner-btn');-->
+<!--        logo.addEventListener('mouseover', () => {-->
+<!--            button.style.display = 'block';-->
+<!--        });-->
+<!--        logo.addEventListener('mouseleave', () => {-->
+<!--            button.style.display = 'none';-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+{% endblock %}
