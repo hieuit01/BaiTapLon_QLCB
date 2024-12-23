@@ -1,0 +1,26 @@
+[
+  {
+    "ho_ten": "Nguyễn Văn Hiếu",
+    "cmnd_ccd": "123456789",
+    "so_dien_thoai": "0977532729",
+    "ma_ve": 1,
+    "ma_lich_chuyen_bay": 1,
+    "thoi_diem_dat_ve": "2024-12-11"
+  },
+  {
+    "ho_ten": "Nguyễn Văn Ba",
+    "cmnd_ccd": "987654321",
+    "so_dien_thoai": "0977309729",
+    "ma_ve": 2,
+    "ma_lich_chuyen_bay": 2,
+    "thoi_diem_dat_ve": "2024-12-11"
+  },
+  {
+    "ho_ten": "Phạm Thu Phương",
+    "cmnd_ccd": "112233445",
+    "so_dien_thoai": "0977003729",
+    "ma_ve": 3,
+    "ma_lich_chuyen_bay": 3,
+    "thoi_diem_dat_ve": "2024-12-11"
+  }
+]

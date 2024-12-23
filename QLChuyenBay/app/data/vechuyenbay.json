@@ -1,0 +1,17 @@
+[
+  {
+    "ma_chuyen_bay": 1,
+    "hang_ve": "HANG_1",
+    "gia": 1500000
+  },
+  {
+    "ma_chuyen_bay": 2,
+    "hang_ve": "HANG_2",
+    "gia": 3000000
+  },
+  {
+    "ma_chuyen_bay": 3,
+    "hang_ve": "HANG_1",
+    "gia": 5000000
+  }
+]

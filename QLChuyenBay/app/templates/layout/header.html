@@ -1,26 +1,54 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark p-3">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">FLIGHT OU</a>
+        <a class="navbar-brand" href="/">FLIGHT OU</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Trang chủ</a>
+                    <a class="nav-link" href="/">Trang chủ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Đặt vé</a>
+                    <a class="nav-link" href="/tim-chuyen">Đặt vé</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-danger" href="/login">Đăng nhập</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-success" href="/register">&# 128102;Đăng ký</a>
-                </li>
+                {% if current_user.is_authenticated %}
+                    {% if current_user.user_role.value == 3 %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/lich-su-dat-ve">Lịch sử đặt vé</a>
+                        </li>
+                    {% elif current_user.user_role.value == 2 %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/ban-ve">Bán vé</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/lap-lich-chuyen-bay">Lập lịch chuyến bay</a>
+                        </li>
+                    {% elif current_user.user_role.value == 1 %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/bao-cao-doanh-thu">Báo cáo doanh thu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/thay-doi-quy-dinh">Thay đổi quy định</a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link text-danger" href="/">
+                            <img src="{{ current_user.avatar }}" width="25" class="rounded-circle" />
+                            Chào {{ current_user.username }}.
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-success" href="/logout">Đăng xuất</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link text-danger" href="/login">Đăng nhập</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-success" href="/register">Đăng ký</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>

@@ -1,0 +1,20 @@
+[
+  {
+    "san_bay_trung_gian": 1,
+    "ma_lich_chuyen_bay": 1,
+    "thoi_gian_bay_gio_phut": "00:30:00",
+    "ghi_chu": "Dừng kỹ thuật"
+  },
+  {
+    "san_bay_trung_gian": 2,
+    "ma_lich_chuyen_bay": 2,
+    "thoi_gian_bay_gio_phut": "00:45:00",
+    "ghi_chu": "Dừng tiếp nhiên liệu"
+  },
+  {
+    "san_bay_trung_gian": 3,
+    "ma_lich_chuyen_bay": 3,
+    "thoi_gian_bay_gio_phut": "00:20:00",
+    "ghi_chu": "Dừng chờ kết nối"
+  }
+]

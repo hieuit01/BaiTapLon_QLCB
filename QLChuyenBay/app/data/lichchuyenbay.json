@@ -1,0 +1,23 @@
+[
+  {
+    "ngay_gio_khoi_hanh": "2024-10-09",
+    "thoi_gian_bay_gio_phut": "03:30:00",
+    "ma_chuyen_bay": 1,
+    "so_ghe_hang_1": 20,
+    "so_ghe_hang_2": 180
+  },
+  {
+    "ngay_gio_khoi_hanh": "2024-12-09",
+    "thoi_gian_bay_gio_phut": "01:45:00",
+    "ma_chuyen_bay": 2,
+    "so_ghe_hang_1": 15,
+    "so_ghe_hang_2": 160
+  },
+  {
+    "ngay_gio_khoi_hanh": "2024-12-09",
+    "thoi_gian_bay_gio_phut": "02:15:00",
+    "ma_chuyen_bay": 3,
+    "so_ghe_hang_1": 10,
+    "so_ghe_hang_2": 140
+  }
+]

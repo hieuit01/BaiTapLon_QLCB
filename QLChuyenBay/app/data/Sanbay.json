@@ -1,0 +1,32 @@
+[
+  {
+    "ten_san_bay": "Tân Sơn Nhất",
+    "tinh_thanh": "TP.Hồ Chí Minh",
+    "quoc_gia": "Việt Nam"
+  },
+  {
+    "ten_san_bay": "Nội Bài",
+    "tinh_thanh": "Hà Nội",
+    "quoc_gia": "Việt Nam"
+  },
+  {
+    "ten_san_bay": "Đà Nẵng",
+    "tinh_thanh": "Đà Nẵng",
+    "quoc_gia": "Việt Nam"
+  },
+  {
+    "ten_san_bay": "Cam Ranh",
+    "tinh_thanh": "Khánh Hòa",
+    "quoc_gia": "Việt Nam"
+  },
+  {
+    "ten_san_bay": "Cát Bi",
+    "tinh_thanh": "Hải Phòng",
+    "quoc_gia": "Việt Nam"
+  },
+  {
+    "ten_san_bay": "Phú Quốc",
+    "tinh_thanh": "Kiên Giang",
+    "quoc_gia": "Việt Nam"
+  }
+]

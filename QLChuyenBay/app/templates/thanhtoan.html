@@ -1,0 +1,35 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-primary mb-4 text-center">Xác nhận thanh toán</h2>
+
+    <form method="POST" class="p-4 border rounded shadow-sm bg-light">
+        <h3 class="text-secondary mb-3">Thông tin đặt vé</h3>
+
+        <div class="mb-3">
+            <p><strong>Họ tên:</strong> {{ dat_ve.ho_ten }}</p>
+            <p><strong>Giới tính:</strong> {{ dat_ve.gioi_tinh }}</p>
+            <p><strong>Ngày sinh:</strong> {{ dat_ve.ngay_sinh }}</p>
+            <p><strong>Chỗ ngồi:</strong> Ghế {{ dat_ve.chon_cho }}</p>
+            <p><strong>Số tiền:</strong> {{ dat_ve.ve_chuyen_bay_rel.gia }} VNĐ</p>
+        </div>
+
+        <div class="mb-4">
+            <label for="pttt" class="form-label">Chọn phương thức thanh toán:</label>
+            <select name="pttt" id="pttt" class="form-select custom-select" required>
+                <option value="CREDIT_CARD">Thẻ tín dụng</option>
+                <option value="MOMO">Ví MoMo</option>
+                <!-- Thêm các phương thức thanh toán khác ở đây -->
+            </select>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <a href="/" class="btn btn-danger">Hủy</a>
+            <button type="submit" class="btn btn-success">Thanh toán</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
+

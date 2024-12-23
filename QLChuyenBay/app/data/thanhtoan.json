@@ -1,0 +1,23 @@
+[
+  {
+    "ngay_thanh_toan": "2024-12-11",
+    "pttt": "CHUYEN_KHOAN",
+    "trang_thai": "DA_THANH_TOAN",
+    "so_tien": 1500000,
+    "ma_dat_ve": 1
+  },
+  {
+    "ngay_thanh_toan": "2024-12-11",
+    "pttt": "TIEN_MAT",
+    "trang_thai": "DA_THANH_TOAN",
+    "so_tien": 3000000,
+    "ma_dat_ve": 2
+  },
+  {
+    "ngay_thanh_toan": "2024-12-11",
+    "pttt": "TIEN_MAT",
+    "trang_thai": "CHUA_THANH_TOAN",
+    "so_tien": 5000000,
+    "ma_dat_ve": 3
+  }
+]

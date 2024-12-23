@@ -1,0 +1,40 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    {% if error_message %}
+    <div class="alert alert-danger text-center">
+        <h4>{{ error_message }}</h4>
+    </div>
+    {% endif %}
+
+    {% if flights %}
+    <h2 class="text-primary mb-4">Kết quả tìm kiếm</h2>
+    <ul class="list-group">
+        {% for flight in flights %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+                <strong>Điểm đi:</strong> {{ flight.chuyen_bay_rel.tuyen_bay.san_bay_di_rel.tinh_thanh }} |
+                <strong>Điểm đến:</strong> {{ flight.chuyen_bay_rel.tuyen_bay.san_bay_den_rel.tinh_thanh }} |
+                <strong>Ngày khởi hành:</strong> {{ flight.ngay_gio_khoi_hanh.strftime('%d/%m/%Y %H:%M') }} |
+                <strong>Thời gian bay:</strong> {{ flight.thoi_gian_bay_gio_phut.strftime('%H:%M') }} |
+                <strong>Vé hạng 1:</strong> {{ flight.so_ghe_hang_1 }} |
+                <strong>Vé hạng 2:</strong> {{ flight.so_ghe_hang_2 }}
+            </div>
+            <form action="/datve/{{ flight.ma_lich_chuyen_bay }}" method="GET">
+                <button type="submit" class="btn btn-success btn-sm"
+                        {% if flight.so_ghe_hang_1 == 0 and flight.so_ghe_hang_2 == 0 %}disabled{% endif %}>
+                    Đặt vé
+                </button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <div class="mt-4">
+        <a href="/" class="btn btn-danger">Trở về</a>
+    </div>
+</div>
+{% endblock %}
+

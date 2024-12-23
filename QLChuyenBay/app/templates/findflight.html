@@ -1,0 +1,38 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+<div class="search-form-container">
+    <h1 class="form-title">Tìm kiếm chuyến bay</h1>
+    <form action="/tim-chuyen" method="post" class="search-form">
+        <div class="form-group">
+            <label for="from" class="form-label">
+                <i class="fas fa-plane-departure"></i> Điểm đi:
+            </label>
+            <select name="san_bay_di" id="from" class="form-control" required>
+                <option value="" disabled selected>Chọn điểm đi</option>
+                {% for airport in airports %}
+                <option value="{{ airport[0] }}">{{ airport[0] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="to" class="form-label">
+                <i class="fas fa-plane-arrival"></i> Điểm đến:
+            </label>
+            <select name="san_bay_den" id="to" class="form-control" required>
+                <option value="" disabled selected>Chọn điểm đến</option>
+                {% for airport in airports %}
+                <option value="{{ airport[0] }}">{{ airport[0] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="departure-date" class="form-label">
+                <i class="fas fa-calendar-alt"></i> Ngày khởi hành:
+            </label>
+            <input type="date" name="ngay_khoi_hanh" id="departure-date" class="form-control" required>
+        </div>
+        <button type="submit" class="btn1 btn-primary">Tìm chuyến bay</button>
+    </form>
+</div>
+{% endblock %}

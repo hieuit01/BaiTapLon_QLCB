@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Nguyễn Văn Hiếu",
+    "username": "hieu",
+    "password": "123",
+    "avatar": "https://res.cloudinary.com/hieuit01/image/upload/v1734869061/gezr1gmr2xf5wn1nb8bm.png",
+    "user_role": "ADMIN"
+  },
+  {
+    "name": "Nguyễn Văn A",
+    "username": "nva",
+    "password": "abc123",
+    "avatar": "https://res.cloudinary.com/hieuit01/image/upload/v1734869061/gezr1gmr2xf5wn1nb8bm.png",
+    "user_role": "NHAN_VIEN"
+  }
+]

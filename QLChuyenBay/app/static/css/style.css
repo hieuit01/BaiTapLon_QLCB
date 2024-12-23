@@ -1,37 +1,202 @@
 body {
     font-family: Arial, sans-serif;
-}
-
-header {
-    background-color: #f2f2f2;
-    padding: 20px;
-}
-
-nav ul {
-    list-style: none;
+    background: url('static/images/background.jpg') no-repeat center center fixed; /* Đặt ảnh nền */
+    background-size: cover; /* Đảm bảo ảnh bao phủ toàn bộ màn hình */
     margin: 0;
     padding: 0;
-    display: flex;
+    color: #2c3e50;
 }
 
-.search-form {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+main {
+    padding: 2rem;
+}
+
+.form-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #2c3e50;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.search-form-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Tăng độ bóng */
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .form-group {
-    margin-bottom: 10px;
+    margin-bottom: 1.5rem;
 }
 
-.partner-airlines {
+.form-label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.btn1 {
+    background-color: #3498db;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: block;
+    width: 100%;
     text-align: center;
-    margin-top: 20px;
+    font-weight: bold;
 }
 
-.airline-logos img {
-    width: 150px;
-    height: auto;
-    margin: 0 20px;
+.btn1:hover {
+    background-color: #2980b9;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Hiệu ứng hover */
+}
+
+/* Partner Airlines Section */
+.partner-airlines {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Bóng đổ */
+    text-align: center;
+    padding: 2rem;
+    margin-top: 3rem;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #34495e;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Tăng chiều sâu chữ */
+}
+
+.airline-logos {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem; /* Khoảng cách giữa các logo */
+    flex-wrap: wrap;
+}
+
+.airline-logo-container {
+    text-align: center;
+    width: 140px; /* Tăng kích thước container để hiển thị rõ hơn */
+}
+
+.airline-logo {
+    width: 140px; /* Kích thước đồng nhất */
+    height: 140px; /* Kích thước đồng nhất */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bóng đổ nhẹ */
+    object-fit: cover; /* Đảm bảo không bị méo ảnh */
+    background-color: #f9f9f9; /* Nền phụ nếu ảnh không tải */
+}
+
+.airline-name {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: #7f8c8d;
+    font-weight: 500;
+}
+#######trang ket qua
+
+/* Tăng khoảng cách giữa các dòng */
+.list-group-item {
+    margin-bottom: 10px;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Nút "Đặt vé" */
+.btn-success {
+    background-color: #28a745;
+    border: none;
+    font-weight: bold;
+    padding: 8px 16px;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+/* Header */
+h2 {
+    font-size: 24px;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+/* Liên kết "Trở về" */
+.btn-danger {
+    font-weight: bold;
+    padding: 10px 20px;
+}
+
+/* Đảm bảo HTML và Body chiếm toàn bộ chiều cao màn hình */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Container chính với Flexbox */
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Main content sẽ chiếm không gian còn lại */
+main.container {
+    flex: 1;
+}
+
+/* Đảm bảo footer luôn ở cuối */
+footer {
+    text-align: center;
+    background-color: #f8f9fa; /* Màu nền ví dụ */
+    padding: 1rem;
+}
+
+/*****Dat ve*****/
+.seat {
+    width: 60px;
+    height: 60px;
+    font-size: 14px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.seat.selected {
+    background-color: #0d6efd;
+    color: white;
+    border-color: #0d6efd;
+}
+
+.seat:disabled {
+    background-color: #6c757d;
+    color: white;
+    border-color: #6c757d;
+    cursor: not-allowed;
+}
+
+/****Thanh toan****/
+/* Điều chỉnh kích thước của select và option */
+.custom-select {
+    width: 50%; /* Chiều rộng vừa phải, có thể điều chỉnh */
+    max-width: 200px; /* Giới hạn chiều rộng tối đa */
+    margin-bottom: 1rem; /* Khoảng cách dưới select */
+    font-size: 1rem; /* Kích thước chữ */
 }
