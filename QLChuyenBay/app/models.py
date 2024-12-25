@@ -5,7 +5,6 @@ from enum import Enum as BaseEnum
 from flask_login import UserMixin
 from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey, Text, Enum, Time, Boolean
 from sqlalchemy.orm import relationship
-
 from app import db, app
 
 
@@ -46,6 +45,9 @@ class User(db.Model, UserMixin):
     avatar = Column(String(255), default="https://res.cloudinary.com/dxxwcby8l/image/upload/v1690528735/cg6clgelp8zjwlehqsst.jpg")
     active = Column(Boolean, default=True)
     user_role = Column(Enum(UserRole), default=UserRole.KHACH_HANG)
+    thanh_toan = relationship("ThanhToan", back_populates="user", lazy=True)
+
+
 
 
     def __str__(self):
@@ -63,15 +65,6 @@ class SanBay(db.Model):
 
     def __str__(self):
         return self.ten_san_bay
-
-
-# class ChuyenBay(db.Model):
-#     __tablename__ = 'chuyen_bay'
-#     ma_chuyen_bay = Column(Integer, primary_key=True, autoincrement=True)
-#     san_bay_di = Column(Integer, ForeignKey('san_bay.ma_san_bay'), nullable=False)
-#     san_bay_den = Column(Integer, ForeignKey('san_bay.ma_san_bay'), nullable=False)
-#     san_bay_di_rel = relationship("SanBay", foreign_keys=[san_bay_di])
-#     san_bay_den_rel = relationship("SanBay", foreign_keys=[san_bay_den])
 
 
 class TuyenBay(db.Model):
@@ -141,10 +134,12 @@ class DatVeChuyenBay(db.Model):
     so_dien_thoai = Column(String(15), nullable=False)
     ma_ve = Column(Integer, ForeignKey('ve_chuyen_bay.ma_ve'), nullable=False)
     ma_lich_chuyen_bay = Column(Integer, ForeignKey('lich_chuyen_bay.ma_lich_chuyen_bay'), nullable=False)
-    chon_cho = Column(Integer, nullable=False)  # Thêm cột này để lưu số ghế
+    chon_cho = Column(Integer, nullable=False)  # Số ghế đã chọn
     thoi_diem_dat_ve = Column(DateTime, default=datetime.now, nullable=False)
+
     ve_chuyen_bay_rel = relationship("VeChuyenBay", backref='dat_ve_chuyen_bay', lazy=True)
     lich_chuyen_bay_rel = relationship("LichChuyenBay", backref='dat_ve_chuyen_bay', lazy=True)
+
 
 
 
@@ -155,8 +150,10 @@ class ThanhToan(db.Model):
     pttt = Column(Enum(PTTT), nullable=False)
     trang_thai = Column(Enum(TrangThaiThanhToan), nullable=False)
     so_tien = Column(Float, nullable=False)
-    ma_dat_ve = Column(Integer, ForeignKey('dat_ve_chuyen_bay.ma_dat_ve'), nullable=False)
-    dat_ve_rel = relationship("DatVeChuyenBay", backref='thanh_toan', lazy=True)
+    ma_user = Column(Integer, ForeignKey('user.id'), nullable=False)  # Liên kết trực tiếp tới User
+    ma_dat_ve = Column(Integer, ForeignKey('dat_ve_chuyen_bay.ma_dat_ve'), nullable=True)  # Không bắt buộc
+    user = relationship("User", back_populates="thanh_toan", lazy=True)
+    dat_ve = relationship("DatVeChuyenBay", backref='thanh_toan', lazy=True)
 
 
 
@@ -167,7 +164,7 @@ class QuyDinh(db.Model):
     thoi_gian_bay_toi_thieu = Column(Time, nullable=False)
     so_san_bay_trung_gian_toi_da = Column(Integer, nullable=False)
     thoi_gian_dung_toi_thieu = Column(Time, nullable=False)
-    thoi_gian_dung_toi_da = Column(Integer, nullable=False)
+    thoi_gian_dung_toi_da = Column(Time, nullable=False)
     so_gio_dat_ve_truoc = Column(Time, nullable=False)
     so_gio_ban_ve_truoc = Column(Time, nullable=False)
 
@@ -236,14 +233,21 @@ def load_tuyen_bay_to_db(json_file):
 def load_lich_chuyen_bay_to_db(json_file):
     data = read_json_file(json_file)
     for item in data:
-        lich_chuyen_bay = LichChuyenBay(
-            ngay_gio_khoi_hanh=datetime.strptime(item['ngay_gio_khoi_hanh'], "%Y-%m-%d"),
-            thoi_gian_bay_gio_phut=datetime.strptime(item['thoi_gian_bay_gio_phut'], "%H:%M:%S").time(),
-            ma_chuyen_bay=item['ma_chuyen_bay'],
-            so_ghe_hang_1=item['so_ghe_hang_1'],
-            so_ghe_hang_2=item['so_ghe_hang_2']
-        )
-        db.session.add(lich_chuyen_bay)
+        try:
+            # Kiểm tra và chuyển đổi định dạng ngày giờ nếu có lỗi
+            ngay_gio_khoi_hanh = datetime.strptime(item['ngay_gio_khoi_hanh'], "%Y-%m-%d")
+            thoi_gian_bay_gio_phut = datetime.strptime(item['thoi_gian_bay_gio_phut'], "%H:%M:%S").time()
+
+            lich_chuyen_bay = LichChuyenBay(
+                ngay_gio_khoi_hanh=ngay_gio_khoi_hanh,
+                thoi_gian_bay_gio_phut=thoi_gian_bay_gio_phut,
+                ma_chuyen_bay=item['ma_chuyen_bay'],
+                so_ghe_hang_1=item['so_ghe_hang_1'],
+                so_ghe_hang_2=item['so_ghe_hang_2']
+            )
+            db.session.add(lich_chuyen_bay)
+        except ValueError as e:
+            print(f"Skipping invalid data: {item} due to error: {e}")
     db.session.commit()
 
 # Load dữ liệu vào bảng SanBayTrungGian
@@ -297,6 +301,7 @@ def load_thanh_toan_to_db(json_file):
             pttt=item['pttt'],
             trang_thai=item['trang_thai'],
             so_tien=item['so_tien'],
+            ma_user=item.get('ma_user'),
             ma_dat_ve=item['ma_dat_ve']
         )
         db.session.add(thanh_toan)
@@ -311,7 +316,7 @@ def load_quy_dinh_to_db(json_file):
             thoi_gian_bay_toi_thieu=datetime.strptime(item['thoi_gian_bay_toi_thieu'], "%H:%M:%S").time(),
             so_san_bay_trung_gian_toi_da=item['so_san_bay_trung_gian_toi_da'],
             thoi_gian_dung_toi_thieu=datetime.strptime(item['thoi_gian_dung_toi_thieu'], "%H:%M:%S").time(),
-            thoi_gian_dung_toi_da=item['thoi_gian_dung_toi_da'],
+            thoi_gian_dung_toi_da=datetime.strptime(item['thoi_gian_dung_toi_da'], "%H:%M:%S").time(),
             so_gio_dat_ve_truoc=datetime.strptime(item['so_gio_dat_ve_truoc'], "%H:%M:%S").time(),
             so_gio_ban_ve_truoc=datetime.strptime(item['so_gio_ban_ve_truoc'], "%H:%M:%S").time()
         )
@@ -321,10 +326,12 @@ def load_quy_dinh_to_db(json_file):
 
 if __name__ == '__main__':
     with app.app_context():
-        load_san_bay_to_db('data/Sanbay.json')
-        load_tuyen_bay_to_db('data/tuyenbay.json')
-        load_chuyen_bay_to_db('data/chuyenbay.json')
-        load_lich_chuyen_bay_to_db('data/lichchuyenbay.json')
-        db.create_all()
-
+        # load_san_bay_to_db('data/Sanbay.json')
+        # load_tuyen_bay_to_db('data/tuyenbay.json')
+        # load_chuyen_bay_to_db('data/chuyenbay.json')
+        # load_lich_chuyen_bay_to_db('data/lichchuyenbay.json')
+        # load_quy_dinh_to_db('data/quydinh.json')
+        load_thanh_toan_to_db('data/thanhtoan.json')
+        # db.create_all()
+        #
         # load_user_to_db('data/user.json')

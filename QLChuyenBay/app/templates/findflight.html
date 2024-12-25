@@ -11,7 +11,7 @@
             <select name="san_bay_di" id="from" class="form-control" required>
                 <option value="" disabled selected>Chọn điểm đi</option>
                 {% for airport in airports %}
-                <option value="{{ airport[0] }}">{{ airport[0] }}</option>
+                <option value="{{ airport.tinh_thanh }}">{{ airport.tinh_thanh }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -20,9 +20,9 @@
                 <i class="fas fa-plane-arrival"></i> Điểm đến:
             </label>
             <select name="san_bay_den" id="to" class="form-control" required>
-                <option value="" disabled selected>Chọn điểm đến</option>
+                <option value="" disabled selected>Chọn điểm đi</option>
                 {% for airport in airports %}
-                <option value="{{ airport[0] }}">{{ airport[0] }}</option>
+                <option value="{{ airport.tinh_thanh }}">{{ airport.tinh_thanh }}</option>
                 {% endfor %}
             </select>
         </div>

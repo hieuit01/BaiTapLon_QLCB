@@ -21,7 +21,7 @@
                 <strong>Vé hạng 1:</strong> {{ flight.so_ghe_hang_1 }} |
                 <strong>Vé hạng 2:</strong> {{ flight.so_ghe_hang_2 }}
             </div>
-            <form action="/datve/{{ flight.ma_lich_chuyen_bay }}" method="GET">
+            <form action="/dat-ve/{{ flight.ma_lich_chuyen_bay }}" method="GET">
                 <button type="submit" class="btn btn-success btn-sm"
                         {% if flight.so_ghe_hang_1 == 0 and flight.so_ghe_hang_2 == 0 %}disabled{% endif %}>
                     Đặt vé
@@ -37,4 +37,3 @@
     </div>
 </div>
 {% endblock %}
-

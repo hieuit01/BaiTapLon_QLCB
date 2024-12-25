@@ -1,23 +1,44 @@
 [
   {
-    "ngay_gio_khoi_hanh": "2024-10-09",
-    "thoi_gian_bay_gio_phut": "03:30:00",
+    "ngay_gio_khoi_hanh": "2024-11-020",
+    "thoi_gian_bay_gio_phut": "04:00:00",
     "ma_chuyen_bay": 1,
+    "so_ghe_hang_1": 30,
+    "so_ghe_hang_2": 150
+  },
+  {
+    "ngay_gio_khoi_hanh": "2024-11-15",
+    "thoi_gian_bay_gio_phut": "05:45:00",
+    "ma_chuyen_bay": 2,
+    "so_ghe_hang_1": 25,
+    "so_ghe_hang_2": 170
+  },
+  {
+    "ngay_gio_khoi_hanh": "2024-10-28",
+    "thoi_gian_bay_gio_phut": "06:00:00",
+    "ma_chuyen_bay": 3,
     "so_ghe_hang_1": 20,
     "so_ghe_hang_2": 180
   },
   {
-    "ngay_gio_khoi_hanh": "2024-12-09",
-    "thoi_gian_bay_gio_phut": "01:45:00",
-    "ma_chuyen_bay": 2,
-    "so_ghe_hang_1": 15,
+    "ngay_gio_khoi_hanh": "2024-10-15",
+    "thoi_gian_bay_gio_phut": "07:30:00",
+    "ma_chuyen_bay": 4,
+    "so_ghe_hang_1": 18,
     "so_ghe_hang_2": 160
   },
   {
-    "ngay_gio_khoi_hanh": "2024-12-09",
-    "thoi_gian_bay_gio_phut": "02:15:00",
-    "ma_chuyen_bay": 3,
-    "so_ghe_hang_1": 10,
-    "so_ghe_hang_2": 140
+    "ngay_gio_khoi_hanh": "2024-10-20",
+    "thoi_gian_bay_gio_phut": "08:15:00",
+    "ma_chuyen_bay": 5,
+    "so_ghe_hang_1": 22,
+    "so_ghe_hang_2": 155
+  },
+  {
+    "ngay_gio_khoi_hanh": "2024-12-25",
+    "thoi_gian_bay_gio_phut": "09:00:00",
+    "ma_chuyen_bay": 9,
+    "so_ghe_hang_1": 28,
+    "so_ghe_hang_2": 165
   }
 ]

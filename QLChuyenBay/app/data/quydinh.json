@@ -4,8 +4,8 @@
     "thoi_gian_bay_toi_thieu": "01:00:00",
     "so_san_bay_trung_gian_toi_da": 2,
     "thoi_gian_dung_toi_thieu": "00:15:00",
-    "thoi_gian_dung_toi_da": 2,
-    "so_gio_dat_ve_truoc": "24:00:00",
-    "so_gio_ban_ve_truoc": "48:00:00"
+    "thoi_gian_dung_toi_da": "02:00:00",
+    "so_gio_dat_ve_truoc": "22:00:00",
+    "so_gio_ban_ve_truoc": "23:00:00"
   }
 ]

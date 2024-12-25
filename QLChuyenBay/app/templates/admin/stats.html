@@ -1,0 +1,141 @@
+{% extends 'admin/master.html' %}
+
+{% block body %}
+<h1 class="text-danger text-center mt-1">THỐNG KÊ BÁO CÁO</h1>
+
+<div class="row">
+    <div class="col-12">
+        <!-- Form để chọn tháng và năm -->
+        <form method="POST" action="{{ url_for('stats.index') }}" class="p-3 border rounded shadow-sm">
+            <div class="row align-items-end">
+                <div class="col-md-8">
+                    <label for="month" class="form-label">Chọn tháng:</label>
+                    <input type="month" id="month" name="month" class="form-control" required
+                           value="{{ selected_month }}">
+                </div>
+                <div class="col-md-4 text-center">
+                    <button type="submit" class="btn btn-primary w-100 mt-4 mt-md-0">Xem báo cáo</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    {% if stats %}
+    <div class="col-12 mt-4">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Tháng</th>
+                <th>Mã chuyến bay</th>
+                <th>Sân bay đi</th>
+                <th>Tỉnh thành đi</th>
+                <th>Quốc gia đi</th>
+                <th>Sân bay đến</th>
+                <th>Tỉnh thành đến</th>
+                <th>Quốc gia đến</th>
+                <th>Tổng doanh thu</th>
+                <th>Tổng số vé</th>
+                <th>Số vé hạng 1</th>
+                <th>Số vé hạng 2</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for s in stats %}
+            <tr>
+                <td>{{ s[0] }}</td>
+                <td>{{ s[1] }}</td>
+                <td>{{ s[2] }}</td>
+                <td>{{ s[3] }}</td>
+                <td>{{ s[4] }}</td>
+                <td>{{ s[5] }}</td>
+                <td>{{ s[6] }}</td>
+                <td>{{ s[7] }}</td>
+                <td>{{ "{:,.0f}".format(s[8]) }} VNĐ</td>
+                <td>{{ s[9] }}</td>
+                <td>{{ s[10] }}</td>
+                <td>{{ s[11] }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-12 mt-4">
+        <canvas id="myChart" style="margin-top: 30px;"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        let data = [];
+        let labels = [];
+        {% for s in stats %}
+            labels.push('Mã: {{ s[1] }} ({{ s[3] }} - {{ s[6] }})');
+            data.push({{ s[8] }}); // Tổng doanh thu
+        {% endfor %}
+
+        const backgroundColors = [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+        ];
+
+        const borderColors = [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+        ];
+
+        const colorsCount = data.length;
+        const chartBackgroundColors = Array.from({ length: colorsCount }, (_, i) => backgroundColors[i % backgroundColors.length]);
+        const chartBorderColors = Array.from({ length: colorsCount }, (_, i) => borderColors[i % borderColors.length]);
+
+        window.onload = function() {
+            const ctx = document.getElementById('myChart');
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Tổng doanh thu (VNĐ)',
+                        data: data,
+                        backgroundColor: chartBackgroundColors,
+                        borderColor: chartBorderColors,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return value.toLocaleString('vi-VN') + ' VNĐ';
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    return tooltipItem.raw.toLocaleString('vi-VN') + ' VNĐ';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+    {% else %}
+    <p class="text-warning text-center">Không có dữ liệu cho tháng và năm đã chọn.</p>
+    {% endif %}
+</div>
+{% endblock %}

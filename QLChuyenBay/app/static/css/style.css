@@ -168,29 +168,7 @@ footer {
     padding: 1rem;
 }
 
-/*****Dat ve*****/
-.seat {
-    width: 60px;
-    height: 60px;
-    font-size: 14px;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.seat.selected {
-    background-color: #0d6efd;
-    color: white;
-    border-color: #0d6efd;
-}
-
-.seat:disabled {
-    background-color: #6c757d;
-    color: white;
-    border-color: #6c757d;
-    cursor: not-allowed;
-}
 
 /****Thanh toan****/
 /* Điều chỉnh kích thước của select và option */

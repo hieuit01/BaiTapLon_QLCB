@@ -1,129 +1,160 @@
 {% extends 'layout/base.html' %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2 class="text-primary mb-4">Đặt vé chuyến bay</h2>
+<div class="container mt-4 booking-page">
+    <h2 class="text-primary mb-4 text-center">Đặt vé chuyến bay</h2>
 
-    <form method="POST">
+    <form method="POST" class="p-4 rounded shadow booking-form">
+        <!-- Thông tin chung -->
         <div class="row mb-3">
-            <label for="ho_ten" class="col-sm-2 col-form-label">Họ tên</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="ho_ten" name="ho_ten" required>
+            <label for="ho_ten" class="col-sm-3 col-form-label text-end">Họ tên</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control border-primary" id="ho_ten" name="ho_ten" required>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="cmnd_ccd" class="col-sm-3 col-form-label text-end">CMND/CCCD</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control border-primary" id="cmnd_ccd" name="cmnd_ccd" required>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="ngay_sinh" class="col-sm-3 col-form-label text-end">Ngày sinh</label>
+            <div class="col-sm-9">
+                <input type="date" class="form-control border-primary" id="ngay_sinh" name="ngay_sinh" required>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="so_dien_thoai" class="col-sm-3 col-form-label text-end">Số điện thoại</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control border-primary" id="so_dien_thoai" name="so_dien_thoai" required>
             </div>
         </div>
 
-
+        <!-- Hạng vé -->
         <div class="row mb-3">
-            <label for="cmnd_ccd" class="col-sm-2 col-form-label">CMND/CCCD</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="cmnd_ccd" name="cmnd_ccd" required>
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <label for="ngay_sinh" class="col-sm-2 col-form-label">Ngày sinh</label>
-            <div class="col-sm-10">
-                <input type="date" class="form-control" id="ngay_sinh" name="ngay_sinh" required>
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <label for="gioi_tinh" class="col-sm-2 col-form-label">Giới tính</label>
-            <div class="col-sm-10">
-                <select class="form-select" id="gioi_tinh" name="gioi_tinh" required>
-                    <option value="" selected disabled>Chọn giới tính</option>
-                    <option value="Nam">Nam</option>
-                    <option value="Nữ">Nữ</option>
-                    <option value="Khác">Khác</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <label for="so_dien_thoai" class="col-sm-2 col-form-label">Số điện thoại</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="so_dien_thoai" name="so_dien_thoai" required>
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <label class="col-sm-2 col-form-label">Hạng vé</label>
-            <div class="col-sm-10">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="hang_ve" id="hang_ve_1" value="HANG_1" required>
-                    <label class="form-check-label" for="hang_ve_1">Hạng 1 (2,000,000 VNĐ)</label>
+            <label class="col-sm-3 col-form-label text-end">Hạng vé</label>
+            <div class="col-sm-9 d-flex align-items-center">
+                <div class="form-check me-3">
+                    <input class="form-check-input" type="radio" name="hang_ve" id="hang_1" value="HANG_1" required>
+                    <label class="form-check-label" for="hang_1">Hạng 1 (2,000,000 VNĐ)</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="hang_ve" id="hang_ve_2" value="HANG_2" required>
-                    <label class="form-check-label" for="hang_ve_2">Hạng 2 (1,000,000 VNĐ)</label>
+                    <input class="form-check-input" type="radio" name="hang_ve" id="hang_2" value="HANG_2">
+                    <label class="form-check-label" for="hang_2">Hạng 2 (1,000,000 VNĐ)</label>
                 </div>
             </div>
         </div>
 
+        <!-- Sơ đồ chỗ ngồi -->
         <div class="row mb-3">
-            <label class="col-sm-2 col-form-label">Chỗ ngồi</label>
-            <div class="col-sm-10">
-                <div id="so_do_cho_ngoi" class="d-flex flex-wrap gap-2">
-                    <!-- Render sơ đồ chỗ ngồi bằng JavaScript hoặc server-side -->
-                </div>
+            <label class="col-sm-3 col-form-label text-end">Chọn chỗ ngồi</label>
+            <div class="col-sm-9">
+                <div id="seats-hang-1" class="seat-container" style="display: none;"></div>
+                <div id="seats-hang-2" class="seat-container" style="display: none;"></div>
             </div>
         </div>
+
 
         <div class="d-flex justify-content-between">
-            <a href="/" class="btn btn-danger">Hủy</a>
-            <button type="submit" class="btn btn-success">Đặt vé</button>
+            <a href="/" class="btn btn-danger btn-lg">Hủy</a>
+            <button type="submit" id="submit-btn" class="btn btn-success btn-lg">Đặt vé</button>
         </div>
     </form>
 </div>
 
+<style>
+    .seat {
+        width: 50px;
+        height: 50px;
+        margin: 5px;
+        text-align: center;
+        line-height: 50px;
+        border: 1px solid #007bff;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .seat.selected {
+        background-color: #007bff;
+        color: white;
+    }
+    .seat.booked {
+        background-color: #ddd;
+        cursor: not-allowed;
+    }
+</style>
+
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const soDoChoNgoi = document.getElementById('so_do_cho_ngoi');
-    const hangVeRadios = document.querySelectorAll('input[name="hang_ve"]');
-    const bookedSeats = {{ booked_seats | tojson | safe }};
+    document.addEventListener('DOMContentLoaded', function () {
+        const bookedSeats = {{ booked_seats | tojson | safe }};
+        let selectedSeat = null;
 
-    console.log(bookedSeats); // Thêm dòng này để kiểm tra giá trị của bookedSeats
+        function renderSeats(container, start, end) {
+            container.innerHTML = '';
+            for (let i = start; i <= end; i++) {
+                const seat = document.createElement('div');
+                seat.className = 'seat';
+                seat.textContent = i;
 
-    function renderSoDo(hangVe) {
-        let gheTrong = [];
-        if (hangVe === 'HANG_1') {
-            gheTrong = [1, 2, 3, 4, 5];  // 5 ghế cho HANG_1
-        } else {
-            gheTrong = [6, 7, 8, 9, 10];  // 5 ghế cho HANG_2
+                if (bookedSeats.includes(i)) {
+                    seat.classList.add('booked');
+                }
+
+                seat.addEventListener('click', () => {
+                    if (!seat.classList.contains('booked')) {
+                        container.querySelectorAll('.seat.selected').forEach(selected => {
+                            selected.classList.remove('selected');
+                        });
+                        seat.classList.toggle('selected');
+                        selectedSeat = seat.classList.contains('selected') ? i : null;
+                    }
+                });
+
+                container.appendChild(seat);
+            }
         }
 
-        soDoChoNgoi.innerHTML = ''; // Xóa các ghế cũ
-        gheTrong.forEach(i => {
-            const btn = document.createElement('button');
-            btn.type = 'button';
-            btn.className = 'btn seat';
-            btn.textContent = `Ghế ${i}`;
+        function showSeats(hang) {
+            const seatsHang1 = document.getElementById('seats-hang-1');
+            const seatsHang2 = document.getElementById('seats-hang-2');
 
-            if (bookedSeats.includes(i)) {
-                btn.classList.add('btn-danger');
-                btn.disabled = true;
-            } else {
-                btn.classList.add('btn-outline-secondary');
-                btn.onclick = () => {
-                    document.querySelectorAll('#so_do_cho_ngoi .seat').forEach(b => b.classList.remove('selected'));
-                    btn.classList.add('selected');
-                    const hiddenInput = document.querySelector('input[name="chon_cho"]');
-                    if (hiddenInput) hiddenInput.remove();
-                    const input = document.createElement('input');
-                    input.type = 'hidden';
-                    input.name = 'chon_cho';
-                    input.value = i;
-                    soDoChoNgoi.appendChild(input);
-                };
+            seatsHang1.style.display = 'none';
+            seatsHang2.style.display = 'none';
+
+            if (hang === 'HANG_1') {
+                seatsHang1.style.display = 'flex';
+                renderSeats(seatsHang1, 1, 10);
+            } else if (hang === 'HANG_2') {
+                seatsHang2.style.display = 'flex';
+                renderSeats(seatsHang2, 11, 20);
+            }
+        }
+
+        document.querySelectorAll('input[name="hang_ve"]').forEach(radio => {
+            radio.addEventListener('change', (event) => {
+                showSeats(event.target.value);
+            });
+        });
+
+        const form = document.querySelector('form');
+        form.addEventListener('submit', (e) => {
+            if (!selectedSeat) {
+                e.preventDefault();
+                alert('Vui lòng chọn chỗ ngồi trước khi đặt vé!');
+                return;
             }
 
-            soDoChoNgoi.appendChild(btn);
+            const seatInput = document.createElement('input');
+            seatInput.type = 'hidden';
+            seatInput.name = 'selected_seats';
+            seatInput.value = JSON.stringify([selectedSeat]);
+            form.appendChild(seatInput);
         });
-    }
 
-    hangVeRadios.forEach(radio => {
-        radio.addEventListener('change', () => renderSoDo(radio.value));
+        const defaultHangVe = document.querySelector('input[name="hang_ve"]:checked');
+        if (defaultHangVe) {
+            showSeats(defaultHangVe.value);
+        }
     });
-});
 </script>
 {% endblock %}

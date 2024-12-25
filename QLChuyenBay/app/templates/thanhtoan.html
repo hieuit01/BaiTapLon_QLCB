@@ -2,34 +2,37 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h2 class="text-primary mb-4 text-center">Xác nhận thanh toán</h2>
+    <h2 class="text-primary text-center">Xác nhận thanh toán</h2>
 
-    <form method="POST" class="p-4 border rounded shadow-sm bg-light">
-        <h3 class="text-secondary mb-3">Thông tin đặt vé</h3>
+    <div class="card shadow-lg p-4 mt-4">
+        <h4><strong>Thông tin hành khách</strong></h4>
+        <p><strong>Tên hành khách:</strong> {{ dat_ve.ho_ten }}</p>
+        <p><strong>Ngày sinh:</strong> {{ dat_ve.ngay_sinh.strftime('%d/%m/%Y') }}</p>
+        <p><strong>Số điện thoại:</strong> {{ dat_ve.so_dien_thoai }}</p>
+        <p><strong>Số ghế:</strong> {{ dat_ve.chon_cho }}</p>
+        <p><strong>Hạng vé:</strong> {{ ve.hang_ve.value }}</p>
+        <p><strong>Giá vé:</strong> {{ "{:,.0f}".format(ve.gia) }} VND</p>
+    </div>
 
-        <div class="mb-3">
-            <p><strong>Họ tên:</strong> {{ dat_ve.ho_ten }}</p>
-            <p><strong>Giới tính:</strong> {{ dat_ve.gioi_tinh }}</p>
-            <p><strong>Ngày sinh:</strong> {{ dat_ve.ngay_sinh }}</p>
-            <p><strong>Chỗ ngồi:</strong> Ghế {{ dat_ve.chon_cho }}</p>
-            <p><strong>Số tiền:</strong> {{ dat_ve.ve_chuyen_bay_rel.gia }} VNĐ</p>
-        </div>
+    <div class="card shadow-lg p-4 mt-4">
+        <h4><strong>Chọn phương thức thanh toán</strong></h4>
+        <form method="POST">
+            <div class="form-group">
+                <label for="payment-method">Chọn phương thức thanh toán:</label>
+                <select id="payment-method" name="pttt" class="form-control">
+                    {% if current_user.user_role.value == 2 %}
+                    <option value="TIEN_MAT">Tiền mặt</option>
+                    {% endif %}
+                    <option value="THE_TIN_DUNG">Thẻ tín dụng</option>
+                    <option value="CHUYEN_KHOAN">Chuyển khoản</option>
+                </select>
+            </div>
 
-        <div class="mb-4">
-            <label for="pttt" class="form-label">Chọn phương thức thanh toán:</label>
-            <select name="pttt" id="pttt" class="form-select custom-select" required>
-                <option value="CREDIT_CARD">Thẻ tín dụng</option>
-                <option value="MOMO">Ví MoMo</option>
-                <!-- Thêm các phương thức thanh toán khác ở đây -->
-            </select>
-        </div>
-
-        <div class="d-flex justify-content-between">
-            <a href="/" class="btn btn-danger">Hủy</a>
-            <button type="submit" class="btn btn-success">Thanh toán</button>
-        </div>
-    </form>
+            <div class="mt-4 d-flex justify-content-between">
+                <a href="{{ url_for('index') }}" class="btn btn-secondary">Hủy</a>
+                <button type="submit" class="btn btn-primary">Xác nhận thanh toán</button>
+            </div>
+        </form>
+    </div>
 </div>
-
 {% endblock %}
-
